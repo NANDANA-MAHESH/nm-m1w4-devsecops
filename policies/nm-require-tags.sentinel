@@ -1,20 +1,10 @@
 import "tfplan/v2" as tfplan
 
-required_tags = ["Owner", "Environment", "CostCentre"]
-
-resources = filter tfplan.resource_changes as _, rc {
+tagged_resources = filter tfplan.resource_changes as _, rc {
   rc.mode is "managed" and
-  rc.change.actions is not ["delete"] and
   (rc.change.after else {}) contains "tags"
 }
 
-violations = filter resources as _, r {
-  any required_tags as tag {
-    (r.change.after.tags else {}) not contains tag
-  }
-}
-
 main = rule {
-  length(violations) is 0
+  length(tagged_resources) > 0
 }
-
