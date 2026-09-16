@@ -1,13 +1,17 @@
 import "tfplan/v2" as tfplan
 
-buckets = filter tfplan.resource_changes as _, rc {
-  rc.type is "aws_s3_bucket"
+s3_buckets = filter tfplan.resource_changes as _, rc {
+  rc.type is "aws_s3_bucket" and
+  rc.mode is "managed" and
+  rc.change.actions is not ["delete"]
 }
 
-encryption = filter tfplan.resource_changes as _, rc {
-  rc.type is "aws_s3_bucket_server_side_encryption_configuration"
+s3_encryption = filter tfplan.resource_changes as _, rc {
+  rc.type is "aws_s3_bucket_server_side_encryption_configuration" and
+  rc.mode is "managed" and
+  rc.change.actions is not ["delete"]
 }
 
 main = rule {
-  length(buckets) is 0 or length(encryption) > 0
+  length(s3_buckets) == length(s3_encryption)
 }
