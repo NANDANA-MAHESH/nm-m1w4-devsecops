@@ -13,5 +13,5 @@ s3_encryption = filter tfplan.resource_changes as _, rc {
 }
 
 main = rule {
-  length(s3_buckets) == length(s3_encryption)
+  false
 }
