@@ -33,4 +33,4 @@ resource "aws_s3_bucket" "bad_bucket" {
   bucket = "nm-hard-test-bucket-001"
 }
 # retrigger sentinel test
-
+# advisory retest
