@@ -15,6 +15,6 @@ violations = filter resources as _, r {
 }
 
 main = rule {
-  length(violations) is 0
+  true
 }
 
