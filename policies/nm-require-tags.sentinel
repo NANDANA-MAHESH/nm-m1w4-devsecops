@@ -6,5 +6,5 @@ tagged_resources = filter tfplan.resource_changes as _, rc {
 }
 
 main = rule {
-false
+  false
 }
