@@ -34,3 +34,4 @@ resource "aws_s3_bucket" "bad_bucket" {
 }
 # retrigger sentinel test
 # advisory retest
+# soft mandatory evidence
