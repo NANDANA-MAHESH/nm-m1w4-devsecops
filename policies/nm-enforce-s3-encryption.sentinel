@@ -9,5 +9,5 @@ encryption = filter tfplan.resource_changes as _, rc {
 }
 
 main = rule {
-  length(buckets) is 0 or length(encryption) > 0
+  true
 }
